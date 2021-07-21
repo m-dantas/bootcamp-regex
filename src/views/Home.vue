@@ -9,6 +9,7 @@
             id="nome"
             name="nome"
             type="text"
+            class="normal"
             v-model="nome"
             @change="validarNome"
           />
@@ -18,6 +19,7 @@
             id="email"
             name="email"
             type="email"
+            class="normal"
             v-model="email"
             @change="validarEmail"
           />
@@ -28,6 +30,7 @@
             id="telefone"
             name="telefone"
             type="tel"
+            class="normal"
             v-model="telefone"
             @change="validarTelefone"
             maxlength="17"
@@ -38,6 +41,7 @@
             id="cpf"
             name="cpf"
             type="tel"
+            class="normal"
             v-model="cpf"
             @change="validarCpf"
             maxlength="14"
@@ -54,6 +58,7 @@
             id="nome-cartao"
             name="nome-cartao"
             type="text"
+            class="normal"
             v-model="nomeCartao"
             @change="validarNomeCartao"
           />
@@ -65,6 +70,7 @@
             id="numero-cartao"
             name="numero-cartao"
             type="tel"
+            class="normal"
             v-model="numeroCartao"
             @change="validarNumeroCartao"
             maxlength="19"
@@ -77,6 +83,7 @@
             id="cod-seguranca"
             name="cod-seguranca"
             type="tel"
+            class="normal"
             v-model="codSeguranca"
             @focus="turnBack"
             @blur="turnFront"
@@ -91,6 +98,7 @@
             id="validade-cartao"
             name="validade-cartao"
             type="tel"
+            class="normal"
             v-model="validadeCartao"
             @change="validarValidadeCartao"
             maxlength="7"
@@ -146,17 +154,17 @@
 
 <script>
 export default {
-  name: "Home",
-  data() {
+  name: 'Home',
+  data () {
     return {
-      nome: "",
-      email: "",
-      telefone: "",
-      cpf: "",
-      nomeCartao: "",
-      numeroCartao: "",
-      codSeguranca: "",
-      validadeCartao: "",
+      nome: '',
+      email: '',
+      telefone: '',
+      cpf: '',
+      nomeCartao: '',
+      numeroCartao: '',
+      codSeguranca: '',
+      validadeCartao: '',
       dadosValidos: {
         nome: false,
         email: false,
@@ -165,109 +173,117 @@ export default {
         nomeCartao: false,
         numeroCartao: false,
         codSeguranca: false,
-        validadeCartao: false,
-      },
-    };
+        validadeCartao: false
+      }
+    }
   },
   methods: {
-    turnCard() {
-      const card = document.querySelector(".card");
-      card.classList.toggle("flip");
+    turnCard () {
+      const card = document.querySelector('.card')
+      card.classList.toggle('flip')
     },
-    turnBack() {
-      const card = document.querySelector(".card");
-      card.classList.remove("flip");
+    turnBack () {
+      const card = document.querySelector('.card')
+      card.classList.remove('flip')
     },
-    turnFront() {
-      const card = document.querySelector(".card");
-      card.classList.add("flip");
+    turnFront () {
+      const card = document.querySelector('.card')
+      card.classList.add('flip')
     },
-    validarNome(event) {
+    validarNome (event) {
       if (
         !this.nome.trim().match(/[ ]/g) ||
         this.nome.match(/[^a-záéíóúâêôãõç ]+/gi)
       ) {
-        event.target.style.border = "2px solid red";
-        console.log("nome inválido");
+        event.target.classList.add('error')
+        console.log('nome inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.nome = true;
-        console.log("nome válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        console.log('nome válido')
+        event.target.classList.add('normal')
+        this.dadosValidos.nome = true
       }
     },
-    validarEmail(event) {
+    validarEmail (event) {
       if (!this.email.match(/^([\w-.])+@[\w-]+\.([\w.]+)$/gi)) {
-        event.target.style.border = "2px solid red";
-        console.log("email inválido");
+        event.target.classList.add('error')
+        console.log('email inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.email = true;
-        console.log("email válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        event.target.classList.add('normal')
+        this.dadosValidos.email = true
+        console.log('email válido')
       }
     },
-    validarTelefone(event) {
+    validarTelefone (event) {
       if (
         !this.telefone.match(/(\+?\d{2}?\s?)?\(?\d{2}\)?\s?\d{4,5}[\s-]?\d{4}/g)
       ) {
-        event.target.style.border = "2px solid red";
-        console.log("telefone inválido");
+        event.target.classList.add('error')
+        console.log('telefone inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.telefone = true;
-        console.log("telefone válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        event.target.classList.add('normal')
+        this.dadosValidos.telefone = true
+        console.log('telefone válido')
       }
     },
-    validarCpf(event) {
+    validarCpf (event) {
       if (!this.cpf.match(/(\d{3}[\s-.]?){3}\d{2}/g)) {
-        event.target.style.border = "2px solid red";
-        console.log("cpf inválido");
+        event.target.classList.add('error')
+        console.log('cpf inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.cpf = true;
-        console.log("cpf válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        event.target.classList.add('normal')
+        this.dadosValidos.cpf = true
+        console.log('cpf válido')
       }
     },
-    validarNomeCartao(event) {
+    validarNomeCartao (event) {
       if (this.nome.match(/[^a-záéíóúâêôãõç ]+/gi)) {
-        event.target.style.border = "2px solid red";
-        console.log("nome cartão inválido");
+        event.target.classList.add('error')
+        console.log('nome cartão inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.nomeCartao = true;
-        console.log("nome cartão válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        event.target.classList.add('normal')
+        this.dadosValidos.nomeCartao = true
+        console.log('nome cartão válido')
       }
     },
-    validarNumeroCartao(event) {
+    validarNumeroCartao (event) {
       if (!this.numeroCartao.match(/(\d{4}[\s.]?){4}/g)) {
-        event.target.style.border = "2px solid red";
-        console.log("número cartão inválido");
+        event.target.classList.add('error')
+        console.log('número cartão inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.numeroCartao = true;
-        console.log("número cartão válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        event.target.classList.add('normal')
+        this.dadosValidos.numeroCartao = true
+        console.log('número cartão válido')
       }
     },
-    validarCodigoSeguranca(event) {
+    validarCodigoSeguranca (event) {
       if (!this.codSeguranca.match(/\d{3,4}/g)) {
-        event.target.style.border = "2px solid red";
-        console.log("código segurança inválido");
+        event.target.classList.add('error')
+        console.log('código segurança inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.codSeguranca = true;
-        console.log("código segurança válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        event.target.classList.add('normal')
+        this.dadosValidos.codSeguranca = true
+        console.log('código segurança válido')
       }
     },
-    validarValidadeCartao(event) {
+    validarValidadeCartao (event) {
       if (!this.validadeCartao.match(/[01]\d\/\d{2,4}/g)) {
-        event.target.style.border = "2px solid red";
-        console.log("validade cartão inválido");
+        event.target.classList.add('error')
+        console.log('validade cartão inválido')
       } else {
-        event.target.style.border = "2px solid #a9b1b7";
-        this.dadosValidos.validadeCartao = true;
-        console.log("validade cartão válido");
+        if (event.target.classList.contains('error')) { event.target.classList.remove('error') }
+        event.target.classList.add('normal')
+        this.dadosValidos.validadeCartao = true
+        console.log('validade cartão válido')
       }
     },
-    cadastrar() {
+    cadastrar () {
       if (
         this.dadosValidos.nome &&
         this.dadosValidos.email &&
@@ -278,11 +294,11 @@ export default {
         this.dadosValidos.codSeguranca &&
         this.dadosValidos.validadeCartao
       ) {
-        this.$router.push("/cadastrofinalizado");
+        this.$router.push('/cadastrofinalizado')
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -567,5 +583,13 @@ export default {
   .btn-cadastrar {
     margin: 180px auto 30px;
   }
+}
+
+.normal {
+  border: 2px solid #a9b1b7;
+}
+
+.error {
+  border: 2px solid red !important;
 }
 </style>

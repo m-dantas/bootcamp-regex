@@ -8,6 +8,7 @@
       <div>
         <router-link to="/">Cadastro</router-link>
         <router-link to="/regex">Regex</router-link>
+        <router-link to="/testes">Testes</router-link>
       </div>
       <div class="exit">
         <router-link to="sair">Sair</router-link>
@@ -18,8 +19,8 @@
 
 <script>
 export default {
-  name: "Header",
-};
+  name: 'Header'
+}
 </script>
 
 <style scoped>
